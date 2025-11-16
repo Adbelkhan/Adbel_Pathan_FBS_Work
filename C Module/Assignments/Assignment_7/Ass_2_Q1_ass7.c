@@ -5,7 +5,7 @@ void twoNumbers(int* ch);
 void main()
 {
 	int  ch ;
-	printf("Enter char \n");
+	printf("Enter choice \n");
     scanf("%d",&ch);
     
 	twoNumbers(&ch);
@@ -28,4 +28,5 @@ void twoNumbers(int* ch)
 	   	printf("Mod of %d and %d is :%d",a,b,a%b);
 	   else
 	   printf("invalid");
+
 }
