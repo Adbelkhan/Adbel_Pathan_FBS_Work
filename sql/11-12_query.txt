@@ -1,0 +1,173 @@
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.43 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| emp                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.07 sec)
+
+mysql> show tables
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> use emp;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| employee      |
++---------------+
+1 row in set (0.02 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| emailid | varchar(20) | YES  | UNI | NULL    |       |
+| salary  | float(7,2)  | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | NULL    |       |
+| mobno   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> alter table employee
+    -> modify column name varchar(20) not null;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| eid     | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| emailid | varchar(20) | YES  | UNI | NULL    |       |
+| salary  | float(7,2)  | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| gender  | char(1)     | YES  |     | NULL    |       |
+| mobno   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> alter table employee
+    -> modify column address varchar(20) default "pune";
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into employee
+    -> (eid, name, emailid)
+    -> value(1,"Jack","j@gmail");
+ERROR 1062 (23000): Duplicate entry '1' for key 'employee.PRIMARY'
+mysql> insert into employee
+    -> (eid, name, emailid)
+    -> value(7,"Jack","j@gmail");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> table employee;
++-----+------+-------------+----------+---------+--------+-------+
+| eid | name | emailid     | salary   | address | gender | mobno |
++-----+------+-------------+----------+---------+--------+-------+
+|   1 | Jack | NULL        | 30000.00 | NULL    | NULL   |  NULL |
+|   2 | Mike | m@gmail.com | 30000.00 | NULL    | NULL   |  NULL |
+|   7 | Jack | j@gmail     |     NULL | pune    | NULL   |  NULL |
++-----+------+-------------+----------+---------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table student
+    -> (rollno int, name varchar(20), cname varchar(20), marks int, emailid varchar(20) );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| employee      |
+| student       |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| rollno  | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| cname   | varchar(20) | YES  |     | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
+| emailid | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> add column mobno int;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| rollno  | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| cname   | varchar(20) | YES  |     | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
+| emailid | varchar(20) | YES  |     | NULL    |       |
+| mobno   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table student
+    -> add primary key(rollno);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| rollno  | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| cname   | varchar(20) | YES  |     | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
+| emailid | varchar(20) | YES  |     | NULL    |       |
+| mobno   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into student
+    -> (rollno, name, cname, marks, emailid)
+    -> value(101,"Rohan","Java",77,"r@email");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> table student;
++--------+-------+-------+-------+---------+-------+
+| rollno | name  | cname | marks | emailid | mobno |
++--------+-------+-------+-------+---------+-------+
+|    101 | Rohan | Java  |    77 | r@email |  NULL |
++--------+-------+-------+-------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql>

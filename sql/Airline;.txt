@@ -1,0 +1,321 @@
+mysql> create database Airline;
+
+mysql> use airline;
+Database changed
+mysql> create table passenger
+    -> (P_id int, P_Name varchar(20), Mob_no varchar(15),Email varchar(25));
+
+mysql> alter table passenger
+    -> add primary key(P_id);
+
+mysql> desc passenger ;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| P_id   | int         | NO   | PRI | NULL    |       |
+| P_Name | varchar(20) | YES  |     | NULL    |       |
+| Mob_no | varchar(15) | YES  |     | NULL    |       |
+| Email  | varchar(25) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
+mysql> alter table passenger
+    -> add column seat_preference varchar(20)
+    -> check (seat_preference in ("Window","Middle","Extra Legroom"));
+
+
+mysql> alter table passenger
+    -> modify P_name varchar(20) not null,
+    -> modify mob_no varchar(20) not null unique,
+    -> modify email varchar(25) not null unique;
+
+mysql> desc passenger ;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| P_id            | int         | NO   | PRI | NULL    |       |
+| P_name          | varchar(20) | NO   |     | NULL    |       |
+| mob_no          | varchar(20) | NO   | UNI | NULL    |       |
+| email           | varchar(25) | NO   | UNI | NULL    |       |
+| seat_preference | varchar(20) | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+
+mysql> create table aircraft
+    -> (aircraft_id int Primary key,
+    -> register_no int not null unique,
+    -> total_seats int not null check(total_seats > 0),
+    -> aircraft_type varchar(20) not null unique );
+
+mysql> desc aircraft;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| aircraft_id   | int         | NO   | PRI | NULL    |       |
+| register_no   | int         | NO   | UNI | NULL    |       |
+| total_seats   | int         | NO   |     | NULL    |       |
+| aircraft_type | varchar(20) | NO   | UNI | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+mysql> create table Flight
+    -> ( F_id int Primary key ,
+    -> origin varchar(20) not null,
+    -> destination varchar(20) not null,
+    -> arrival_time datetime not null,
+    -> departure datetime not null );
+
+mysql> alter table flight
+    -> add column aircraft_id int ;
+
+mysql> alter table flight
+    -> add foreign key (aircraft_id)
+    -> references aircraft(aircraft_id);
+
+mysql> ALTER TABLE flight
+    -> MODIFY COLUMN departure DATETIME NOT NULL AFTER destination;
+
+
+mysql> ALTER TABLE flight
+    -> MODIFY COLUMN arrival_time DATETIME NOT NULL AFTER departure;
+
+
+mysql> desc flight;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| F_id         | int         | NO   | PRI | NULL    |       |
+| origin       | varchar(20) | NO   |     | NULL    |       |
+| destination  | varchar(20) | NO   |     | NULL    |       |
+| departure    | datetime    | NO   |     | NULL    |       |
+| arrival_time | datetime    | NO   |     | NULL    |       |
+| aircraft_id  | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+
+
+mysql> create table Crew
+    -> ( crew_id int Primary Key,
+    -> name varchar(20) not null,
+    -> role varchar(30) not null ,
+    -> check (role in ('Pilot','Co-Pilot','Flight Attendants')) );
+
+mysql> alter table crew
+    -> add column salary decimal(9,2) not null;
+
+mysql> desc crew;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| crew_id | int          | NO   | PRI | NULL    |       |
+| name    | varchar(20)  | NO   |     | NULL    |       |
+| role    | varchar(30)  | NO   |     | NULL    |       |
+| salary  | decimal(9,2) | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+
+
+
+
+mysql> create table FlightCrew_Assignment
+    -> ( assign_id int Primary key,
+    -> crew_id int ,
+    -> F_id int ,
+    -> Crew_role varchar(30) not null,
+    -> check (Crew_role in ('Pilot','Co_Pilot','Flight Attendant')) );
+
+
+mysql> alter table flightcrew_assignment
+    -> add foreign key (crew_id)
+    -> references crew(crew_id);
+
+
+mysql> alter table flightcrew_assignment
+    -> add foreign key (F_id)
+    -> references flight(F_id);
+
+
+mysql> alter table flightcrew_assignment
+    -> modify crew_id int not null,
+    -> modify f_id int not null;
+
+mysql> ALTER TABLE flightcrew_assignment
+    -> DROP CHECK flightcrew_assignment_chk_1;
+
+
+mysql> alter table flightcrew_assignment
+    -> add constraint check (crew_role in ('Pilot','Co_Pilot','Flight Attendants'));
+
+
+mysql> desc flightcrew_assignment;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| assign_id | int         | NO   | PRI | NULL    |       |
+| crew_id   | int         | NO   | MUL | NULL    |       |
+| f_id      | int         | NO   | MUL | NULL    |       |
+| Crew_role | varchar(30) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+
+mysql> create table Price
+    -> ( Price_id int Primary Key,
+    -> Fare_class varchar(25) not null,
+    -> check (Fare_class in ('Economy','Business','First Class')),
+    -> price decimal(6,2) not null);
+
+mysql> alter table price
+    -> modify price decimal(8,2);
+mysql> alter table price
+    -> add column F_id int ;
+
+
+mysql> alter table price
+    -> add foreign key(F_id)
+    -> references flight(F_id);
+
+
+mysql> desc price;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Price_id   | int          | NO   | PRI | NULL    |       |
+| Fare_class | varchar(25)  | NO   |     | NULL    |       |
+| price      | decimal(8,2) | YES  |     | NULL    |       |
+| F_id       | int          | YES  | MUL | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+
+
+mysql> create table Booking
+    -> ( B_id int primary key ,
+    -> P_id int not null,
+    -> Booking_status varchar(30) not null,
+    -> Booking_date date not null,
+    -> Price_id int not null);
+
+mysql> alter table Booking
+    -> add foreign key (P_id)
+    -> references Passenger(P_id);
+
+mysql> alter table Booking
+    -> add foreign key (Price_id)
+    -> references Price(Price_id);
+
+mysql> desc Booking;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| B_id           | int         | NO   | PRI | NULL    |       |
+| P_id           | int         | NO   | MUL | NULL    |       |
+| Booking_status | varchar(30) | NO   |     | NULL    |       |
+| Booking_date   | date        | NO   |     | NULL    |       |
+| Price_id       | int         | NO   | MUL | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+
+mysql> create table Payment
+    -> ( Payment_id int Primary key,
+    -> B_id int not null,
+    -> payment_date date not null,
+    -> amount_paid decimal(10,2) not null,
+    ->  );
+
+mysql> alter table payment
+    -> add foreign key(B_id)
+    -> references Booking(B_id);
+
+mysql> ALTER TABLE payment
+    -> MODIFY payment_status VARCHAR(20) NOT NULL;
+
+mysql> ALTER TABLE payment
+    -> MODIFY payment_method VARCHAR(20) NOT NULL;
+
+mysql> alter table payment
+    -> add constraint check(payment_status in ('Pending','Completed','Failed'));
+
+mysql> ALTER TABLE payment
+    -> ADD CONSTRAINT chk_payment_method
+    -> CHECK (payment_method IN ('UPI','Credit card','Debit card','Cash','Net banking'));
+
+
+mysql> desc payment;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| Payment_id     | int           | NO   | PRI | NULL    |       |
+| B_id           | int           | NO   | MUL | NULL    |       |
+| payment_date   | date          | NO   |     | NULL    |       |
+| amount_paid    | decimal(10,2) | NO   |     | NULL    |       |
+| payment_status | varchar(20)   | NO   |     | NULL    |       |
+| payment_method | varchar(20)   | NO   |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+
+
+mysql> create table itineray
+    -> ( itineray_id int primary key ,
+    -> B_id int not null,
+    -> Start_date date not null,
+    -> end_date date not null,
+    -> origin varchar(20) not null,
+    -> destination varchar(30) not null);
+
+mysql> alter table itineray
+    -> add foreign key(B_id)
+    -> references Booking(B_id);
+
+mysql> desc itineray;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| itineray_id | int         | NO   | PRI | NULL    |       |
+| B_id        | int         | NO   | MUL | NULL    |       |
+| Start_date  | date        | NO   |     | NULL    |       |
+| end_date    | date        | NO   |     | NULL    |       |
+| origin      | varchar(20) | NO   |     | NULL    |       |
+| destination | varchar(30) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+
+mysql> create table Itineray_flight
+    -> ( itineray_flight_id int Primary key,
+    -> itineray_id int not null,
+    -> F_id int not null,
+    -> Flight_seq_no int not null);
+
+mysql> alter table Itineray_flight
+    -> add foreign key(itineray_id)
+    -> references itineray(itineray_id);
+
+mysql> alter table Itineray_flight
+    -> add foreign key(F_id)
+    -> references Flight(F_id);
+
+mysql> desc Itineray_flight;
++--------------------+------+------+-----+---------+-------+
+| Field              | Type | Null | Key | Default | Extra |
++--------------------+------+------+-----+---------+-------+
+| itineray_flight_id | int  | NO   | PRI | NULL    |       |
+| itineray_id        | int  | NO   | MUL | NULL    |       |
+| F_id               | int  | NO   | MUL | NULL    |       |
+| Flight_seq_no      | int  | NO   |     | NULL    |       |
++--------------------+------+------+-----+---------+-------+
+
+mysql> select * from flight
+    -> where time(departure) in ('09:00:00','10:00:00');
++------+-----------+-------------+---------------------+---------------------+-------------+
+| F_id | origin    | destination | departure           | arrival_time        | aircraft_id |
++------+-----------+-------------+---------------------+---------------------+-------------+
+|    1 | Delhi     | Mumbai      | 2026-01-27 09:00:00 | 2026-01-27 11:30:00 |           1 |
+|    4 | Chennai   | Kolkata     | 2026-01-28 10:00:00 | 2026-01-28 12:45:00 |           4 |
+|    8 | Bangalore | Doha        | 2026-01-30 09:00:00 | 2026-01-30 12:30:00 |           6 |
++------+-----------+-------------+---------------------+---------------------+-------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from aircraft
+
+    -> where aircraft_id in
+    -> ( select aircraft_id from flight where time(departure) in ('09:00:00','14:00:00'));
++-------------+-------------+-------------+---------------+
+| aircraft_id | register_no | total_seats | aircraft_type |
++-------------+-------------+-------------+---------------+
+|           1 |        1001 |         180 | Boeing 737    |
+|           2 |        1002 |         220 | Airbus A320   |
+|           6 |        1006 |         280 | Boeing 787    |
++-------------+-------------+-------------+---------------+
+3 rows in set (0.01 sec)
+

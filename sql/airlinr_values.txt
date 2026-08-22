@@ -1,0 +1,303 @@
+mysql> INSERT INTO passenger
+    -> (P_id, P_name, mob_no, email, seat_preference)
+    -> VALUES
+    -> (1,'Rahul Sharma','9899543077','rahul@gmail.com','Middle'),
+    -> (2, 'Priya Patil', '9876543211', 'priya@gmail.com', 'Middle'),
+    -> (3, 'Amit Verma', '9876543212', 'amit@gmail.com', 'Extra Legroom'),
+    -> (4, 'Sneha Kulkarni', '9876543213', 'sneha@gmail.com', 'Window'),
+    -> (5, 'Rohit Singh', '9876543214', 'rohit@gmail.com', 'Middle'),
+    -> (6, 'Anjali Deshmukh', '9876543215', 'anjali@gmail.com', 'Extra Legroom'),
+    -> (7, 'Vikas Gupta', '9876543216', 'vikas@gmail.com', 'Window'),
+    -> (8, 'Neha Joshi', '9876543217', 'neha@gmail.com', 'Middle'),
+    -> (9, 'Suresh Sul', '9876543218', 'suresh@gmail.com', 'Extra Legroom'),
+    -> (10, 'Pooja Mehta', '9876543219', 'pooja@gmail.com', 'Window'),
+    -> (11, 'Karan Malhotra', '9876543220', 'karan@gmail.com', 'Middle'),
+    -> (12, 'Jay Nair', '9876543221', 'jay@gmail.com', 'Extra Legroom'),
+    -> (13, 'Arjun Reddy', '9876543222', 'arjun@gmail.com', 'Window'),
+    -> (14, 'Swati Chopra', '9876543223', 'swati@gmail.com','Middle'),
+    -> (15, 'Manoj Bansal', '9876543224', 'manoj@gmail.com', 'Middle');
+
+
+mysql> table passenger;
++------+-----------------+------------+------------------+-----------------+
+| P_id | P_name          | mob_no     | email            | seat_preference |
++------+-----------------+------------+------------------+-----------------+
+|    1 | Rahul Sharma    | 9899543077 | rahul@gmail.com  | Middle          |
+|    2 | Priya Patil     | 9876543211 | priya@gmail.com  | Middle          |
+|    3 | Amit Verma      | 9876543212 | amit@gmail.com   | Extra Legroom   |
+|    4 | Sneha Kulkarni  | 9876543213 | sneha@gmail.com  | Window          |
+|    5 | Rohit Singh     | 9876543214 | rohit@gmail.com  | Middle          |
+|    6 | Anjali Deshmukh | 9876543215 | anjali@gmail.com | Extra Legroom   |
+|    7 | Vikas Gupta     | 9876543216 | vikas@gmail.com  | Window          |
+|    8 | Neha Joshi      | 9876543217 | neha@gmail.com   | Middle          |
+|    9 | Suresh Sul      | 9876543218 | suresh@gmail.com | Extra Legroom   |
+|   10 | Pooja Mehta     | 9876543219 | pooja@gmail.com  | Window          |
+|   11 | Karan Malhotra  | 9876543220 | karan@gmail.com  | Middle          |
+|   12 | Jay Nair        | 9876543221 | jay@gmail.com    | Extra Legroom   |
+|   13 | Arjun Reddy     | 9876543222 | arjun@gmail.com  | Window          |
+|   14 | Swati Chopra    | 9876543223 | swati@gmail.com  | Middle          |
+|   15 | Manoj Bansal    | 9876543224 | manoj@gmail.com  | Middle          |
++------+-----------------+------------+------------------+-----------------+
+
+
+mysql> insert into aircraft
+    -> (aircraft_id, register_no, total_seats, aircraft_type)
+    -> values
+    -> (1,1001,180,'Boeing 737'),
+    -> (2,1002,220,'Airbus A320'),
+    -> (3,1003,300,'Boeing 777'),
+    -> (4,1004,350,'Airbus A350'),
+    -> (5,1005,150,'Embraer E195'),
+    -> (6,1006,280,'Boeing 787'),
+    -> (7,1007,240,'Airbus A321'),
+    -> (8,1008,200,'Boeing 747'),
+    -> (9,1009,310,'Airbus A330'),
+    -> (10,1010,300,'Emirates Airbus A380');
+
+mysql> table aircraft;
++-------------+-------------+-------------+----------------------+
+| aircraft_id | register_no | total_seats | aircraft_type        |
++-------------+-------------+-------------+----------------------+
+|           1 |        1001 |         180 | Boeing 737           |
+|           2 |        1002 |         220 | Airbus A320          |
+|           3 |        1003 |         300 | Boeing 777           |
+|           4 |        1004 |         350 | Airbus A350          |
+|           5 |        1005 |         150 | Embraer E195         |
+|           6 |        1006 |         280 | Boeing 787           |
+|           7 |        1007 |         240 | Airbus A321          |
+|           8 |        1008 |         200 | Boeing 747           |
+|           9 |        1009 |         310 | Airbus A330          |
+|          10 |        1010 |         300 | Emirates Airbus A380 |
++-------------+-------------+-------------+----------------------+
+
+mysql> insert into flight
+    -> (F_id, origin, destination, departure, arrival_time,aircraft_id)
+    -> values
+    -> (1, 'Delhi', 'Mumbai', '2026-01-27 09:00:00', '2026-01-27 11:30:00', 1),
+    -> (2, 'Mumbai', 'Bangalore', '2026-01-27 14:00:00', '2026-01-27 16:15:00', 2),
+    -> (3, 'Bangalore', 'Chennai', '2026-01-28 06:00:00', '2026-01-28 07:30:00', 3),
+    -> (4, 'Chennai', 'Kolkata', '2026-01-28 10:00:00', '2026-01-28 12:45:00', 4),
+    -> (5, 'Kolkata', 'Delhi', '2026-01-29 15:00:00', '2026-01-29 17:45:00', 5),
+    -> (6, 'Delhi', 'Dubai', '2026-01-29 22:00:00', '2026-01-30 01:30:00', 10),
+    -> (7, 'Mumbai', 'Singapore', '2026-01-30 05:00:00', '2026-01-30 13:00:00', 9),
+    -> (8, 'Bangalore', 'Doha', '2026-01-30 09:00:00', '2026-01-30 12:30:00', 6),
+    -> (9, 'Chennai', 'Abu Dhabi', '2026-01-31 02:00:00', '2026-01-31 05:30:00', 10),
+    -> (10, 'Kolkata', 'London', '2026-01-31 21:00:00', '2026-02-01 05:30:00', 8);
+
+mysql> table flight;
++------+-----------+-------------+---------------------+---------------------+-------------+
+| F_id | origin    | destination | departure           | arrival_time        | aircraft_id |
++------+-----------+-------------+---------------------+---------------------+-------------+
+|    1 | Delhi     | Mumbai      | 2026-01-27 09:00:00 | 2026-01-27 11:30:00 |           1 |
+|    2 | Mumbai    | Bangalore   | 2026-01-27 14:00:00 | 2026-01-27 16:15:00 |           2 |
+|    3 | Bangalore | Chennai     | 2026-01-28 06:00:00 | 2026-01-28 07:30:00 |           3 |
+|    4 | Chennai   | Kolkata     | 2026-01-28 10:00:00 | 2026-01-28 12:45:00 |           4 |
+|    5 | Kolkata   | Delhi       | 2026-01-29 15:00:00 | 2026-01-29 17:45:00 |           5 |
+|    6 | Delhi     | Dubai       | 2026-01-29 22:00:00 | 2026-01-30 01:30:00 |          10 |
+|    7 | Mumbai    | Singapore   | 2026-01-30 05:00:00 | 2026-01-30 13:00:00 |           9 |
+|    8 | Bangalore | Doha        | 2026-01-30 09:00:00 | 2026-01-30 12:30:00 |           6 |
+|    9 | Chennai   | Abu Dhabi   | 2026-01-31 02:00:00 | 2026-01-31 05:30:00 |          10 |
+|   10 | Kolkata   | London      | 2026-01-31 21:00:00 | 2026-02-01 05:30:00 |           8 |
++------+-----------+-------------+---------------------+---------------------+-------------+
+
+
+mysql> insert into crew
+    -> (crew_id, name, role, salary)
+    -> values
+    -> (1, 'Vivek Rao', 'Pilot', 120000.00),
+    -> (2, 'Meena Iyer', 'Co-Pilot', 95000.00),
+    -> (3, 'Sanjana Kapoor', 'Flight Attendants', 45000.00),
+    -> (4, 'Raghav Menon', 'Flight Attendants', 47000.00),
+    -> (5, 'Aditya Singh', 'Pilot', 125000.00),
+    -> (6, 'Neelam Sharma', 'Co-Pilot', 98000.00),
+    -> (7, 'Tanvi Desai', 'Flight Attendants', 46000.00),
+    -> (8, 'Kunal Joshi', 'Flight Attendants', 48000.00),
+    -> (9, 'Varun Reddy', 'Pilot', 130000.00),
+    -> (10, 'Isha Gupta', 'Co-Pilot', 100000.00),
+    -> (11, 'Priyanka Nair', 'Flight Attendants', 45000.00),
+    -> (12, 'Siddharth Choudhary', 'Flight Attendants', 47000.00),
+    -> (13, 'Harsh Vardhan', 'Pilot', 135000.00),
+    -> (14, 'Ananya Bansal', 'Co-Pilot', 102000.00),
+    -> (15, 'Ritika Mehta', 'Flight Attendants', 46000.00);
+
+mysql> table crew;
++---------+---------------------+-------------------+-----------+
+| crew_id | name                | role              | salary    |
++---------+---------------------+-------------------+-----------+
+|       1 | Vivek Rao           | Pilot             | 120000.00 |
+|       2 | Meena Iyer          | Co-Pilot          |  95000.00 |
+|       3 | Sanjana Kapoor      | Flight Attendants |  45000.00 |
+|       4 | Raghav Menon        | Flight Attendants |  47000.00 |
+|       5 | Aditya Singh        | Pilot             | 125000.00 |
+|       6 | Neelam Sharma       | Co-Pilot          |  98000.00 |
+|       7 | Tanvi Desai         | Flight Attendants |  46000.00 |
+|       8 | Kunal Joshi         | Flight Attendants |  48000.00 |
+|       9 | Varun Reddy         | Pilot             | 130000.00 |
+|      10 | Isha Gupta          | Co-Pilot          | 100000.00 |
+|      11 | Priyanka Nair       | Flight Attendants |  45000.00 |
+|      12 | Siddharth Choudhary | Flight Attendants |  47000.00 |
+|      13 | Harsh Vardhan       | Pilot             | 135000.00 |
+|      14 | Ananya Bansal       | Co-Pilot          | 102000.00 |
+|      15 | Ritika Mehta        | Flight Attendants |  46000.00 |
++---------+---------------------+-------------------+-----------+
+
+
+mysql> INSERT INTO flightcrew_assignment
+    -> (assign_id, crew_id, F_id, crew_role)
+    -> VALUES
+    -> (1, 1, 1, 'Pilot'),
+    -> (2, 2, 1, 'Co_Pilot'),
+    -> (3, 3, 1, 'Flight Attendants'),
+    -> (4, 4, 2, 'Pilot'),
+    -> (5, 5, 2, 'Co_Pilot'),
+    -> (6, 6, 2, 'Flight Attendants'),
+    -> (7, 7, 3, 'Pilot'),
+    -> (8, 8, 3, 'Co_Pilot'),
+    -> (9, 9, 3, 'Flight Attendants'),
+    -> (10, 10, 4, 'Pilot');
+
+mysql> table flightcrew_assignment;
++-----------+---------+------+-------------------+
+| assign_id | crew_id | f_id | Crew_role         |
++-----------+---------+------+-------------------+
+|         1 |       1 |    1 | Pilot             |
+|         2 |       2 |    1 | Co_Pilot          |
+|         3 |       3 |    1 | Flight Attendants |
+|         4 |       4 |    2 | Pilot             |
+|         5 |       5 |    2 | Co_Pilot          |
+|         6 |       6 |    2 | Flight Attendants |
+|         7 |       7 |    3 | Pilot             |
+|         8 |       8 |    3 | Co_Pilot          |
+|         9 |       9 |    3 | Flight Attendants |
+|        10 |      10 |    4 | Pilot             |
++-----------+---------+------+-------------------+
+
+
+mysql> INSERT INTO price
+    -> (Price_id, Fare_class, price)
+    -> VALUES
+    -> (1, 'Economy', 3500.00),
+    -> (2, 'Economy', 4200.00),
+    -> (3, 'Economy', 5000.00),
+    ->
+    -> (4, 'Business', 8500.00),
+    -> (5, 'Business', 9200.00),
+    -> (6, 'Business', 11000.00),
+    ->
+    -> (7, 'First Class', 15000.00),
+    -> (8, 'First Class', 18000.00),
+    -> (9, 'First Class', 22000.00),
+    -> (10,'First Class', 25000.00);
+
+
+mysql> table price;
++----------+-------------+----------+
+| Price_id | Fare_class  | price    |
++----------+-------------+----------+
+|        1 | Economy     |  3500.00 |
+|        2 | Economy     |  4200.00 |
+|        3 | Economy     |  5000.00 |
+|        4 | Business    |  8500.00 |
+|        5 | Business    |  9200.00 |
+|        6 | Business    | 11000.00 |
+|        7 | First Class | 15000.00 |
+|        8 | First Class | 18000.00 |
+|        9 | First Class | 22000.00 |
+|       10 | First Class | 25000.00 |
++----------+-------------+----------+
+
+
+mysql> UPDATE price SET F_id = 1 WHERE Price_id = 1;  -- Economy 3500
+
+mysql> UPDATE price SET F_id = 1 WHERE Price_id = 4;  -- Business 8500
+
+mysql> UPDATE price SET F_id = 1 WHERE Price_id = 7;  -- First Class 15000
+
+mysql> UPDATE price SET F_id = 2 WHERE Price_id = 2;  -- Economy 4200
+
+mysql> UPDATE price SET F_id = 2 WHERE Price_id = 5;  -- Business 9200
+
+mysql> UPDATE price SET F_id = 2 WHERE Price_id = 8;  -- First Class 18000
+
+mysql> UPDATE price SET F_id = 3 WHERE Price_id = 3;  -- Economy 5000
+
+mysql> UPDATE price SET F_id = 3 WHERE Price_id = 6;  -- Business 11000
+
+mysql> UPDATE price SET F_id = 3 WHERE Price_id = 9;  -- First Class 22000
+
+mysql> UPDATE price SET F_id = 4 WHERE Price_id = 10; -- First Class 25000
+
+mysql> SELECT * FROM price ORDER BY F_id;
++----------+-------------+----------+------+
+| Price_id | Fare_class  | price    | F_id |
++----------+-------------+----------+------+
+|        1 | Economy     |  3500.00 |    1 |
+|        4 | Business    |  8500.00 |    1 |
+|        7 | First Class | 15000.00 |    1 |
+|        2 | Economy     |  4200.00 |    2 |
+|        5 | Business    |  9200.00 |    2 |
+|        8 | First Class | 18000.00 |    2 |
+|        3 | Economy     |  5000.00 |    3 |
+|        6 | Business    | 11000.00 |    3 |
+|        9 | First Class | 22000.00 |    3 |
+|       10 | First Class | 25000.00 |    4 |
++----------+-------------+----------+------+
+
+mysql> table price;
++----------+-------------+----------+------+
+| Price_id | Fare_class  | price    | F_id |
++----------+-------------+----------+------+
+|        1 | Economy     |  3500.00 |    1 |
+|        2 | Economy     |  4200.00 |    2 |
+|        3 | Economy     |  5000.00 |    3 |
+|        4 | Business    |  8500.00 |    1 |
+|        5 | Business    |  9200.00 |    2 |
+|        6 | Business    | 11000.00 |    3 |
+|        7 | First Class | 15000.00 |    1 |
+|        8 | First Class | 18000.00 |    2 |
+|        9 | First Class | 22000.00 |    3 |
+|       10 | First Class | 25000.00 |    4 |
++----------+-------------+----------+------+
+
+mysql> insert into booking
+    -> (B_id, P_id, Booking_status,Booking_date, Price_id)
+    -> values
+    -> (1, 1, 'Confirmed', '2026-01-20', 1),
+    -> (2, 2, 'Confirmed', '2026-01-21', 2),
+    -> (3, 3, 'Cancelled', '2026-01-22', 3),
+    -> (4, 4, 'Confirmed', '2026-01-23', 4),
+    -> (5, 5, 'Confirmed', '2026-01-23', 5),
+    -> (6, 6, 'Confirmed', '2026-01-24', 6),
+    -> (7, 7, 'Confirmed', '2026-01-24', 7),
+    -> (8, 8, 'Confirmed', '2026-01-25', 8),
+    -> (9, 9, 'Cancelled', '2026-01-25', 9),
+    -> (10, 10, 'Confirmed', '2026-01-26', 10),
+    -> (11, 11, 'Confirmed', '2026-01-26', 1),
+    -> (12, 12, 'Confirmed', '2026-01-27', 2),
+    -> (13, 13, 'Confirmed', '2026-01-27', 3),
+    -> (14, 14, 'Confirmed', '2026-01-28', 4),
+    -> (15, 15, 'Confirmed', '2026-01-28', 5);
+
+mysql> table booking
+    -> ;
++------+------+----------------+--------------+----------+
+| B_id | P_id | Booking_status | Booking_date | Price_id |
++------+------+----------------+--------------+----------+
+|    1 |    1 | Confirmed      | 2026-01-20   |        1 |
+|    2 |    2 | Confirmed      | 2026-01-21   |        2 |
+|    3 |    3 | Cancelled      | 2026-01-22   |        3 |
+|    4 |    4 | Confirmed      | 2026-01-23   |        4 |
+|    5 |    5 | Confirmed      | 2026-01-23   |        5 |
+|    6 |    6 | Confirmed      | 2026-01-24   |        6 |
+|    7 |    7 | Confirmed      | 2026-01-24   |        7 |
+|    8 |    8 | Confirmed      | 2026-01-25   |        8 |
+|    9 |    9 | Cancelled      | 2026-01-25   |        9 |
+|   10 |   10 | Confirmed      | 2026-01-26   |       10 |
+|   11 |   11 | Confirmed      | 2026-01-26   |        1 |
+|   12 |   12 | Confirmed      | 2026-01-27   |        2 |
+|   13 |   13 | Confirmed      | 2026-01-27   |        3 |
+|   14 |   14 | Confirmed      | 2026-01-28   |        4 |
+|   15 |   15 | Confirmed      | 2026-01-28   |        5 |
++------+------+----------------+--------------+----------+
+
+

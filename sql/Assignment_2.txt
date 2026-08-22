@@ -1,0 +1,122 @@
+Task / Problems:
+1) Create the table Member, Books and Issue without any constraints as
+mentioned in the schema description above.
+
+mysql> create table Member
+    -> (member_id int, Member_name varchar(30), member_address varchar(50), Acc_Open_Date date, Membership_type varchar(20), fees_paid int, Max_books_Allowed int, Penalty_Amount decimal(7,2));
+
+
+mysql> create table Books
+    -> (Book_no int , Book_name varchar(30), Author_name varchar(30), cost Decimal(7,2), Category char(10));
+
+
+
+mysql> create table Issue
+    -> (Lib_issue_id int, Book_no int, Member_id int, issue_date Date, Return_date Date);
+
+
+
+2) View the structure of the tables.
+
+mysql> desc member;
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| member_id         | int          | YES  |     | NULL    |       |
+| Member_name       | varchar(30)  | YES  |     | NULL    |       |
+| member_address    | varchar(50)  | YES  |     | NULL    |       |
+| Acc_Open_Date     | date         | YES  |     | NULL    |       |
+| Membership_type   | varchar(20)  | YES  |     | NULL    |       |
+| fees_paid         | int          | YES  |     | NULL    |       |
+| Max_books_Allowed | int          | YES  |     | NULL    |       |
+| Penalty_Amount    | decimal(7,2) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+
+
+
+desc Books;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Book_no     | int          | YES  |     | NULL    |       |
+| Book_name   | varchar(30)  | YES  |     | NULL    |       |
+| Author_name | varchar(30)  | YES  |     | NULL    |       |
+| cost        | decimal(7,2) | YES  |     | NULL    |       |
+| Category    | char(10)     | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+
+mysql> desc Issue;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| Lib_issue_id | int  | YES  |     | NULL    |       |
+| Book_no      | int  | YES  |     | NULL    |       |
+| Member_id    | int  | YES  |     | NULL    |       |
+| issue_date   | date | YES  |     | NULL    |       |
+| Return_date  | date | YES  |     | NULL    |       |
++--------------+------+------+-----+---------+-------+
+
+4) Create the table Member again as per the schema description with the
+following constraints.
+a. Member_Id – Primary Key
+b. Membership_type - ‘Lifetime’,’ Annual’, ‘Half Yearly’,’ Quarterly’
+
+mysql> alter table member
+    -> add primary key(member_id);
+
+mysql> alter table member
+    -> modify Membership_type
+    -> enum('Lifetime','Annual','Half Yearly','Quarterly');
+
+
+5) Modify the table Member increase the width of the member name to 30
+characters.
+
+mysql> alter table Issue
+    -> add reference char(30);
+
+
+6) Add a column named as Reference of Char(30) to Issue table.
+
+
+mysql> alter table issue
+    -> drop column reference;
+
+
+8) Rename the table Issue to Lib_Issue.
+
+mysql> rename table issue to Lib_Issue;
+
+9) Insert data in table member 
+
+mysql> insert into member (member_id,Member_name, member_address,Acc_Open_Date, Membership_type,fees_paid,Max_books_Allowed,Penalty_Amount)
+    -> values(1,"Richa Sharma","Pune","2025-12-05","Lifetime",25000,5,50),
+    -> (2,"Garima sen","Pune","2025-12-20","Annual",1000,5,0);
+
+
+mysql> table member;
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | Member_name  | member_address | Acc_Open_Date | Membership_type | fees_paid | Max_books_Allowed | Penalty_Amount |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | Richa Sharma | Pune           | 2025-12-05    | Lifetime        |     25000 |                 5 |          50.00 |
+|         2 | Garima sen   | Pune           | 2025-12-20    | Annual          |      1000 |                 5 |           0.00 |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+10) Insert at least 5 records with suitable data.
+
+mysql> table member;
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+| member_id | Member_name  | member_address | Acc_Open_Date | Membership_type | fees_paid | Max_books_Allowed | Penalty_Amount |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+|         1 | Richa Sharma | Pune           | 2025-12-05    | Lifetime        |     25000 |                 5 |          50.00 |
+|         2 | Garima sen   | Pune           | 2025-12-20    | Annual          |      1000 |                 5 |           0.00 |
+|         3 | Amit Patil   | Nashik         | 2024-11-11    | Half Yearly     |       600 |                 4 |          10.00 |
+|         4 | Sneha Joshi  | Nagpur         | 2025-03-18    | Quarterly       |       300 |                 3 |           0.00 |
+|         5 | Rahul        | Pune           | 2023-07-09    | Annual          |      1000 |                 5 |          25.00 |
++-----------+--------------+----------------+---------------+-----------------+-----------+-------------------+----------------+
+
+
+
+
+
