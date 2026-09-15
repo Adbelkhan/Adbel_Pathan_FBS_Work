@@ -19,7 +19,7 @@ public class QueryAnalyzer
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://@localhost:3306/advjava","root","pass1530");
+			con=DriverManager.getConnection("jdbc:mysql://@localhost:3306/database","root","adbel974g");
 			stmt=con.createStatement();
 			
 			//find the type of query 
